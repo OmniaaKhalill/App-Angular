@@ -1,0 +1,23 @@
+<div class="input-group flex-nowrap">
+    <div class="input-group-prepend">
+        <span class="input-group-text">ID</span>
+    </div>
+    <input class="form-control" type="text" [(ngModel)]="nstd.id">
+</div>
+
+<div class="input-group flex-nowrap mt-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Name</span>
+    </div>
+    <input class="form-control" type="text" [(ngModel)]="nstd.name">
+</div>
+
+<div class="input-group flex-nowrap mt-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Age</span>
+    </div>
+    <input class="form-control" type="text" [(ngModel)]="nstd.age">
+</div>
+<br>
+
+<button class="btn btn-primary" (click)="add()" > add</button>
