@@ -4,7 +4,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { StudentAddComponent } from '../student-add/student-add.component';
 import { StudentDetailsComponent } from '../student-details/student-details.component';
-import { StudentServiceService } from '../../_service/student-service.service';
+import { StudentServiceService } from '../../_services/student-service.service';
+import { NavigationExtras, Router, RouterOutlet } from '@angular/router';
+
 
 @Component({
   selector: 'app-student-list',
@@ -14,49 +16,32 @@ import { StudentServiceService } from '../../_service/student-service.service';
     FormsModule,
     StudentAddComponent,
     StudentDetailsComponent,
+    RouterOutlet
   ],
   templateUrl: './student-list.component.html',
   styleUrl: './student-list.component.css',
 })
 export class StudentListComponent {
+  constructor(public studentService: StudentServiceService,public router:Router) {}
 
-  std: Student = new Student(0, '', 0);
-  students: Student[] = [
-    new Student(1, 'omnia1', 24),
-    new Student(2, 'omnia2', 25),
-    new Student(3, 'omnia3', 26),
-  ];
+  students: Student[] = this.studentService.getallSudents();
 
   delete(stdid: number): void {
-    const index = this.students.findIndex((student) => student.id === stdid);
-
-    this.students.splice(index, 1);
-  }
-  addStudent(s: Student) {
-    this.students.push(new Student(s.id, s.name, s.age));
+    this.studentService.delete(stdid);
   }
 
-  stdDtails: Student = new Student(0, '', 0);
+ 
 
-  showDetails(id: Number) {
-    const index = this.students.findIndex((student) => student.id === id);
-    this.stdDtails = this.students[index];
+  showDetails(stdId: number) {
+    // Constructing navigation extras with the id parameter
+    const navigationExtras: NavigationExtras = {
+      state: {
+        id: stdId
+      }
+    };
+  
+    // Navigating to the route with navigation extras
+    this.router.navigateByUrl(`/students/details/${stdId}`, navigationExtras);
   }
-
-    // constructor(public studentService: StudentServiceService) {
-
-  // }
-
-  // students:Student[]=this.studentService.getallSudents()
-
-  //  delete(stdid: number): void {
-  //   this.studentService.delete(stdid)
-
-  //  }
-
-  //  stdDtails:Student=new Student(0,"",0);
-  //  showDetails(id:Number){
-  //      this.stdDtails= this.studentService.showDetails(id);
-  //    }
-
+  
 }
