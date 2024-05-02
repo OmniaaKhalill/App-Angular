@@ -1,5 +1,5 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Student } from '../../models/student';
+import { Student } from '../../models/student/student';
 import { routes } from '../../app.routes';
 
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
@@ -10,29 +10,21 @@ import { StudentServiceService } from '../../_services/student-service.service';
   standalone: true,
   imports: [RouterOutlet],
   templateUrl: './student-details.component.html',
-  styleUrl: './student-details.component.css'
+  styleUrl: './student-details.component.css',
 })
-export class StudentDetailsComponent implements OnInit ,OnDestroy {
+export class StudentDetailsComponent implements OnInit, OnDestroy {
+  std: Student = new Student(0, '', 0);
 
- std:Student=new Student(0,"",0);
-
-  constructor(public activatedRoute:ActivatedRoute ,public studentService: StudentServiceService ) {
- 
-  
-   
-  }
-  ngOnDestroy(): void {
-
-  }
+  constructor(
+    public activatedRoute: ActivatedRoute,
+    public studentService: StudentServiceService
+  ) {}
+  ngOnDestroy(): void {}
 
   ngOnInit(): void {
-    
-    this.activatedRoute.params.subscribe(params => {
+    this.activatedRoute.params.subscribe((params) => {
       const id = +params['id']; // Convert id to number
       this.std = this.studentService.getById(id);
     });
   }
-
 }
-
-

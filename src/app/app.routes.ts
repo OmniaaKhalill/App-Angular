@@ -6,22 +6,29 @@ import { LoginComponent } from './account/login/login.component';
 import { StudentAddComponent } from './student/student-add/student-add.component';
 import { StudentDetailsComponent } from './student/student-details/student-details.component';
 import { DepartmentAddComponent } from './department/department-add/department-add.component';
-import { canLoginGuard } from './guard/can-login.guard';
+import { canLoginGuard } from './guard/log-in/can-login.guard';
 import { LoginOutComponent } from './account/login-out/login-out.component';
 
-
 export const routes: Routes = [
-{path:'home',component:HomeComponent},
+  { path: 'home', component: HomeComponent },
 
+  {
+    path: 'students',
+    loadChildren: () =>
+      import('./routes/student.routes').then((s) => s.stdRoutes),
+  },
 
-{path:'students',loadChildren:()=>import('./student/student.routes').then(s=>s.stdRoutes)},
-
-
-{path:'departments',component:DepartmentListComponent,canActivate:[canLoginGuard]},
-{path:'departments/add',component:DepartmentAddComponent,canActivate:[canLoginGuard]},
-{path:'login',component:LoginComponent},
-{path:'logout',component:LoginOutComponent},
-{path:'',redirectTo:"home",pathMatch:"full"}
-
-
+  {
+    path: 'departments',
+    component: DepartmentListComponent,
+    canActivate: [canLoginGuard],
+  },
+  {
+    path: 'departments/add',
+    component: DepartmentAddComponent,
+    canActivate: [canLoginGuard],
+  },
+  { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LoginOutComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
 ];

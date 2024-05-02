@@ -1,6 +1,6 @@
 import { Component, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import { Student } from '../../models/student';
+import { Student } from '../../models/student/student';
 import { FormsModule } from '@angular/forms';
 import { StudentServiceService } from '../../_services/student-service.service';
 
@@ -14,11 +14,8 @@ import { StudentServiceService } from '../../_services/student-service.service';
 export class StudentAddComponent {
   nstd: Student = new Student(0, 'omnia', 25);
 
-
-    constructor(public studentService: StudentServiceService) {
-
-    }
-  add(){
-   this.studentService.addStudent(this.nstd)
+  constructor(public studentService: StudentServiceService) {}
+  add() {
+    this.studentService.addStudent(this.nstd);
   }
 }
