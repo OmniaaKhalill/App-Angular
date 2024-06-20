@@ -1,0 +1,71 @@
+<form [formGroup]="specialMealForm" (ngSubmit)="onSubmit()" class="  container p-5  meal-form">
+  <div class="form-group">
+    <label for="name" class="mb-2">Name</label>
+    <input
+      type="text"
+      id="name"
+      class="form-control mb-2"
+      formControlName="name"
+    />
+    <div class="reqired" *ngIf="specialMealForm.get('name')!.invalid && specialMealForm.get('name')!.touched">
+      Name is required.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="description" class="mb-2">Description</label>
+    <input
+      type="text"
+      id="description"
+      class="form-control mb-2"
+      formControlName="description"
+    />
+    <div class="reqired" *ngIf="specialMealForm.get('description')!.invalid && specialMealForm.get('description')!.touched">
+      Description is required.
+    </div>
+  </div>
+
+
+
+  <label class =" d-block">price range </label>
+
+<div class="  container  d-flex flex-row justify-content-between" >   
+  <div class="form-group  price">
+    <label for="price_1" class="mb-2">From</label>
+    <input
+      type="number"
+      id="price_1"
+      class="form-control mb-2"
+      formControlName="price_1"
+    />
+    <div class="reqired" *ngIf="specialMealForm.get('price_1')!.invalid && specialMealForm.get('price_1')!.touched">
+      Price 1 is required and must be a positive number.
+    </div>
+  </div>
+
+  <div class="form-group price">
+    <label for="price_2" class="mb-2">To</label>
+    <input
+      type="number"
+      id="price_2"
+      class="form-control mb-2"
+      formControlName="price_2"
+    />
+    <div class="reqired" *ngIf="specialMealForm.get('price_2')!.invalid && specialMealForm.get('price_2')!.touched">
+      Price 2 is required and must be a positive number.
+    </div>
+  </div>
+</div>
+
+
+
+
+  <br>
+  <button type="submit" class="btn btnstyle">
+    <span>Submit Request</span>
+    <i class="fa-solid fa-arrow-right-long"></i>
+  </button>
+</form>
+
+
+ 

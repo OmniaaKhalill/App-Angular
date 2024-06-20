@@ -8,6 +8,16 @@ import { StudentDetailsComponent } from './student/student-details/student-detai
 import { DepartmentAddComponent } from './department/department-add/department-add.component';
 import { canLoginGuard } from './guard/log-in/can-login.guard';
 import { LoginOutComponent } from './account/login-out/login-out.component';
+import { SpecialMealFormComponent } from './SpecialMeal/special-meal-form/special-meal-form.component';
+import { ClientProfleFormComponent } from './Profiles/client-profile-form/client-profle-form.component';
+import { ClientProfleComponent } from './Profiles/client-profile/client-profle.component';
+import { ClientFavouriteComponent } from './Profiles/client-favourite/client-favourite.component';
+import { ClientOrderComponent } from './Profiles/client-order/client-order.component';
+import { ChefPageFormComponent } from './Profiles/chef-page-form/chef-page-form.component';
+import { ChefPageComponent } from './Profiles/chef-page/chef-page.component';
+import { ChefMealsComponent } from './Profiles/chef-meals/chef-meals.component';
+import { RequestedMealsComponent } from './Profiles/requested-meals/requested-meals.component';
+import { GetAuthTokenComponent } from './Payment/get-auth-token/get-auth-token.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -30,5 +40,32 @@ export const routes: Routes = [
   },
   { path: 'login', component: LoginComponent },
   { path: 'logout', component: LoginOutComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: '', pathMatch: 'full' },
+
+  {path: '', component:GetAuthTokenComponent},
+  {path: 'GetAuthToken', component:GetAuthTokenComponent},
+
+  { path: 'ClientForm', component:ClientProfleFormComponent },
+
+  { path: 'profile', redirectTo: 'profile/Favourites', pathMatch: 'full' },
+  { path: 'profile', component:ClientProfleComponent,children:[
+
+ 
+    {path: 'Favourites', component:ClientFavouriteComponent},
+    {path: 'Orders', component:ClientOrderComponent},
+]
+ },
+ { path: 'ChefPageForm', component:ChefPageFormComponent },
+
+ { path: 'ChefPage', redirectTo: 'ChefPage/chefMeals', pathMatch: 'full' },
+ { path: 'ChefPage', component:ChefPageComponent ,children:[
+
+
+  {path: 'chefMeals', component:ChefMealsComponent},
+  {path: 'requestedMeals', component:RequestedMealsComponent},
+ ]},
+
+
+
+
 ];
